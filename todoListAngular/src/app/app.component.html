@@ -1,0 +1,42 @@
+<body>
+  <table>
+    <tr>
+      <th>Description</th>
+      <th><select id="filterDones" name="filterDones" [(ngModel)]="filterForDone" (click)="filterDone()">
+          <option value="1">Both</option>
+          <option value="2">Not Done</option>
+          <option value="3">Done</option>
+        </select></th>
+      <th>Person / Search <input id="searchPerson" name="searchPerson" (input)="searchPerson()"
+          [(ngModel)]="searchPersonRaw"></th>
+      <th>Remove/Edit</th>
+    </tr>
+    <tr *ngFor="let todo of newTodos,index as i">
+      <td><input [hidden]="!todo.edit" [(ngModel)]="todo.description" (change)="todo.edit = false"><label
+          [hidden]="todo.edit">{{todo.description}}</label></td>
+      <td><input type="checkbox" id="isDone" name="isDone" [(ngModel)]="todo.isDone">
+      </td>
+      <td>{{todo.person}}</td>
+      <td><button (click)="removeTodo(i)">Remove</button> / <button (click)="todo.edit= true">Edit</button></td>
+
+    </tr>
+  </table>
+  <p></p>
+  <table>
+    <p>Add Todo</p>
+
+    <tr>
+      <th>Description</th>
+      <th>Done</th>
+      <th>Person</th>
+      <th>Add</th>
+    </tr>
+    <tr>
+      <td><input id="description" [(ngModel)]="newDesc"></td>
+      <td><input type="checkbox" id="done" [(ngModel)]="newDone"></td>
+      <td><input id="person" [(ngModel)]="newPerson"></td>
+      <td><button (click)="addTodo()">Add</button></td>
+    </tr>
+  </table>
+</body>
+<router-outlet></router-outlet>
